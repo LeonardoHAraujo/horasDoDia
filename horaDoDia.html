@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Hora do Dia</title>
+        <style>
+            body {
+                font: normal 15pt helvetica;
+                margin-top: 100px;
+            }
+            header {
+                color: white;
+                text-align: center;
+            }
+            section {
+                background-color: white;
+                border-radius: 10px;
+                padding: 15px;
+                width: 500px;
+                margin: auto;
+                box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.363);
+            }
+            footer {
+                text-align: center;
+                font-style: italic;
+                color: white;
+            }
+            #msg {
+                text-align: center;
+            }
+            #foto {
+                text-align: center;
+                margin-top: 15px;
+            }
+            #msg2 {
+                text-align: center;
+                margin-top: 15px;
+            }
+            @media screen and (max-width: 768px) {
+                section {
+                    width: 300px;
+                    margin-top: 50px;
+                }
+                header {
+                    margin-top: 50px;
+                }
+                footer {
+                    margin-top: 40px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Hora do Dia</h1>
+        </header>
+        <section>
+            <div id="msg">Aqui é a mensagem...</div>
+            <div id="foto">
+                <img id="imagem" src="" alt="foto da hora do dia">
+            </div>
+            <div id="msg2"></div>
+        </section>
+        <footer>
+            <p>&copy; Leonardo DEV</p>
+        </footer>
+        <script>
+            
+            function refresh() {
+                setInterval(() => {
+                    window.location.reload();
+                }, 5000);
+            }
+
+            function carregar() {
+                let msg = document.getElementById('msg');
+                let msg2 = document.getElementById('msg2');
+                let img = document.getElementById('imagem');
+                let h1 = document.getElementsByTagName('h1')[0];
+                let p = document.getElementsByTagName('p')[0];
+                let data = new Date;
+                let hora = data.getHours();
+                let minutos = data.getMinutes();
+                msg.innerHTML = `Agora são ${hora} Hrs e ${minutos} min.`;
+
+                let fundo = document.getElementsByTagName('body')[0];
+
+                if(hora >= 0 && hora < 5) {
+                    img.src = './fotos/madrugada.png';
+                    fundo.style.backgroundColor = '#040229';
+                    msg2.innerHTML = 'Boa Madrugada !'
+                }else if(hora >= 5 && hora < 12) {
+                    img.src = './fotos/dia.png';
+                    fundo.style.backgroundColor = '#eff5b5';
+                    msg2.innerHTML = 'Bom Dia !'
+                    h1.style.color = '#000000';
+                    p.style.color = '#000000';
+                }else if(hora >= 12 && hora < 18) {
+                    img.src = './fotos/tarde.png';
+                    fundo.style.backgroundColor = '#eba865';
+                    msg2.innerHTML = 'Boa Tarde !';
+                    h1.style.color = '#000000';
+                    p.style.color = '#000000';
+                }else {
+                    img.src = './fotos/noite.png';
+                    fundo.style.backgroundColor = '#345cad';
+                    msg2.innerHTML = 'Boa Noite !'
+                }
+            }
+            window.addEventListener('load',carregar);
+            window.addEventListener('load',refresh);
+
+
+        </script>
+    </body>
+</html>
